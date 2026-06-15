@@ -13,7 +13,7 @@
         --bg-overlay-dark: rgba(0, 0, 0, 0.001);        
 
         /* 3. 前景元件（主列表、導航條、按鈕）的毛玻璃底色厚度 */
-        --light-ui-bg: rgba(255, 255, 255, 0.65);     
+        --light-ui-bg: rgba(255, 255, 255, 0.50);     
         --dark-ui-bg: rgba(0, 0, 0, 0.35);            
         --dark-btn-bg: rgba(0, 0, 0, 0.55);           
     }
@@ -56,7 +56,7 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         background-color: var(--light-ui-bg) !important;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.10);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
         padding: 10px;
     }
     /* 主列表夜間模式透明 */
