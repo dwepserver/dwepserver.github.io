@@ -57,6 +57,7 @@
         -webkit-backdrop-filter: blur(10px);
         background-color: var(--light-ui-bg) !important;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        padding: 10px;
     }
     /* 主列表夜間模式透明 */
     .obj-box.hope-stack.hope-c-dhzjXW.hope-c-PJLV.hope-c-PJLV-iigjoxS-css {
@@ -64,6 +65,7 @@
         -webkit-backdrop-filter: blur(10px);
         background-color: var(--dark-ui-bg) !important;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        padding: 10px;
     }
     /* readme白天模式透明 */
     .hope-c-PJLV.hope-c-PJLV-ikSuVsl-css {
