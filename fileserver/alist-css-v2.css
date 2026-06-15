@@ -1,0 +1,195 @@
+<style>
+    /* ===========================================
+             此版本含有魔改頁尾
+        ==========================================
+          【全域自訂變數專區】只需調整這裡的數值即可 
+        ========================================== */
+    :root {
+        /* 1. 背景毛玻璃霧化程度 */
+        --bg-blur-light: blur(6px);   
+        --bg-blur-dark: blur(6px);    
+
+        /* 2. 背景深淺遮罩 */
+        --bg-overlay-light: rgba(255, 255, 255, 0.25); 
+        --bg-overlay-dark: rgba(0, 0, 0, 0.45);        
+
+        /* 3. 前景元件（主列表、導航條、按鈕）的毛玻璃底色厚度 */
+        --light-ui-bg: rgba(255, 255, 255, 0.65);     
+        --dark-ui-bg: rgba(0, 0, 0, 0.35);            
+        --dark-btn-bg: rgba(0, 0, 0, 0.55);           
+    }
+
+    /* 基礎背景圖片設置 */
+    .hope-ui-dark, .hope-ui-light {
+        background-image: url('https://dwepserver.github.io/image1.png') !important;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        position: relative;
+    }
+
+    /* 全螢幕背景毛玻璃與深淺遮罩層 */
+    .hope-ui-light::before, .hope-ui-dark::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1; 
+        pointer-events: none; 
+    }
+
+    .hope-ui-light::before {
+        background-color: var(--bg-overlay-light);
+        backdrop-filter: var(--bg-blur-light);
+        -webkit-backdrop-filter: var(--bg-blur-light);
+    }
+
+    .hope-ui-dark::before {
+        background-color: var(--bg-overlay-dark);
+        backdrop-filter: var(--bg-blur-dark);
+        -webkit-backdrop-filter: var(--bg-blur-dark);
+    }
+    
+    /* 主列表白天模式透明 */
+    .obj-box.hope-stack.hope-c-dhzjXW.hope-c-PJLV.hope-c-PJLV-igScBhH-css {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background-color: var(--light-ui-bg) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    }
+    /* 主列表夜間模式透明 */
+    .obj-box.hope-stack.hope-c-dhzjXW.hope-c-PJLV.hope-c-PJLV-iigjoxS-css {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background-color: var(--dark-ui-bg) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    }
+    /* readme白天模式透明 */
+    .hope-c-PJLV.hope-c-PJLV-ikSuVsl-css {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background-color: var(--light-ui-bg) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    }
+    /* readme夜間模式透明 */
+    .hope-c-PJLV.hope-c-PJLV-iiuDLME-css {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background-color: var(--dark-ui-bg) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    /* 頂部區域 (Header) 深淺模式自動切換底色 */
+    .hope-ui-light .header {
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        background: var(--light-ui-bg) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    }
+    .hope-ui-dark .header {
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        background: var(--dark-ui-bg) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    /* 導航條 */
+    .hope-ui-light .body > .nav {
+        background-color: var(--light-ui-bg);
+        border-radius: var(--hope-radii-xl);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .hope-ui-dark .body > .nav {
+        background-color: var(--dark-ui-bg);
+        border-radius: var(--hope-radii-xl);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .body > .nav::after {
+        display: none;
+    }
+
+    /* 右上視圖切換菜單 */
+    .hope-ui-light .hope-c-PJLV-iSMXDf-css {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background: var(--light-ui-bg);
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .hope-ui-dark .hope-c-PJLV-iSMXDf-css {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background: var(--dark-ui-bg);
+        border-radius: var(--hope-radii-xl);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 右下角按鈕透明 */
+    .hope-ui-light .hope-c-PJLV-ijgzmFG-css {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background-color: var(--light-ui-bg) !important;
+    }
+    .hope-ui-dark .hope-c-PJLV-ijgzmFG-css {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background-color: var(--dark-btn-bg) !important;
+    }
+
+    /* 夜間模式下的 header 面板字體強制改為白色 */
+    .hope-ui-dark .hope-center.hope-c-jKOUQW.hope-c-PJLV.hope-c-PJLV-ikaMhsQ-css {
+        color: #ffffff !important;
+    }
+
+    /* ==========================================
+       【CSS 終極魔改頁尾】不扭曲結構、完美自適應、關閉連結
+       ========================================== */
+    .footer.hope-stack {
+        background: transparent !important; /* 確保原廠頁尾底色全透明去背 */
+        padding: 24px 0;
+    }
+
+    /* 鎖定原廠放「由 AList 驅動」的那個超連結盒子 */
+    .footer .hope-anchor[href*="github.com/alist-org/alist"] {
+        font-size: 0 !important;         /* 徹底隱藏原廠文字，不佔空間 */
+        display: inline-flex !important; /* 啟用彈性布局維持文字結構不塌陷 */
+        align-items: center;
+        text-decoration: none !important;
+        pointer-events: none !important; /* 禁用點擊功能，超連結徹底失效 */
+        cursor: default !important;       /* 讓滑鼠懸停顯示一般文字指針 */
+    }
+
+    /* 用偽元素重新注入你的文字，跟隨原本排版，絕對不歪 */
+    .footer .hope-anchor[href*="github.com/alist-org/alist"]::before {
+        content: "© DWEP Server";          /* 在此隨意更換你的頁尾名 */
+        font-size: 14px !important;      /* 恢復正常字體大小 */
+        font-weight: 500;
+        user-select: none;               /* 防止使用者不小心選取到 */
+    }
+
+    /* 白天模式頁尾顏色控制 */
+    .hope-ui-light .footer .hope-stack, 
+    .hope-ui-light .footer .hope-anchor,
+    .hope-ui-light .footer .hope-anchor::before {
+        color: #4a5568 !important;
+    }
+    /* 夜間模式頁尾顏色控制（亮白帶文字陰影） */
+    .hope-ui-dark .footer .hope-stack, 
+    .hope-ui-dark .footer .hope-anchor,
+    .hope-ui-dark .footer .hope-anchor::before {
+        color: #e2e8f0 !important;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    }
+
+    /* 程式碼區塊微調 */
+    .hope-ui-light pre { background-color: rgba(255, 255, 255, 0.1) !important; }
+    .hope-ui-dark pre { background-color: rgba(255, 255, 255, 0) !important; }
+
+    /* 相容性維持 */
+    dibu { border-top: 0px; position: absolute; bottom: 0; width: 100%; margin: 0px; padding: 0px; }
+    .App { min-height: 85vh; }
+    .table { margin: auto; }
+</style>
