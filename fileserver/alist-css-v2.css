@@ -10,8 +10,8 @@
         --bg-blur-dark: blur(6px);    
 
         /* 2. 背景深淺遮罩 */
-        --bg-overlay-light: rgba(255, 255, 255, 0.25); 
-        --bg-overlay-dark: rgba(0, 0, 0, 0.45);        
+        --bg-overlay-light: rgba(255, 255, 255, 0.3); 
+        --bg-overlay-dark: rgba(0, 0, 0, 0.001);        
 
         /* 3. 前景元件（主列表、導航條、按鈕）的毛玻璃底色厚度 */
         --light-ui-bg: rgba(255, 255, 255, 0.65);     
