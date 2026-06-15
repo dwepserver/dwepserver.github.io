@@ -100,11 +100,19 @@
         background-color: var(--light-ui-bg);
         border-radius: var(--hope-radii-xl);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding-right: 10px;
+        padding-left:  10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
     }
     .hope-ui-dark .body > .nav {
         background-color: var(--dark-ui-bg);
         border-radius: var(--hope-radii-xl);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding-right: 10px;
+        padding-left:  10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
     }
     
     .body > .nav::after {
