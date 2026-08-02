@@ -162,7 +162,7 @@
     }
 
     /* 鎖定原廠放「由 AList 驅動」的那個超連結盒子 */
-    .footer .hope-anchor[href*="github.com/alist-org/alist"] {
+    .footer .hope-anchor[href*="https://github.com/OpenListTeam/OpenList"] {
         font-size: 0 !important;         /* 徹底隱藏原廠文字，不佔空間 */
         display: inline-flex !important; /* 啟用彈性布局維持文字結構不塌陷 */
         align-items: center;
@@ -183,7 +183,7 @@
     .hope-ui-light .footer .hope-stack, 
     .hope-ui-light .footer .hope-anchor,
     .hope-ui-light .footer .hope-anchor::before {
-        color: #4a5568 !important;
+        color: #dfdfdf !important;
     }
     /* 夜間模式頁尾顏色控制（亮白帶文字陰影） */
     .hope-ui-dark .footer .hope-stack, 
