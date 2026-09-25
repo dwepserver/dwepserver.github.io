@@ -238,14 +238,14 @@
         display: none !important;
     }
 
-/* 隱藏原本的「登錄到 DWEP File Server」文字 */
-h2.hope-heading.hope-c-PJLV-ibojvKk-css {
-    font-size: 0 !important;
-}
+    /* 隱藏原本的「登錄到 DWEP File Server」文字 */
+    h2.hope-heading.hope-c-PJLV-ibojvKk-css {
+        font-size: 0 !important;
+    }
 
-/* 用偽元素重新寫入「DWEP File Server」 */
-h2.hope-heading.hope-c-PJLV-ibojvKk-css::after {
-    content: "DWEP File Server";
-    font-size: 1.5rem !important; /* 恢復原本標題大小 */
-    font-weight: 700;
-}
+    /* 用偽元素重新寫入「DWEP File Server」 */
+    h2.hope-heading.hope-c-PJLV-ibojvKk-css::after {
+        content: "DWEP File Server";
+        font-size: 1.5rem !important; /* 恢復原本標題大小 */
+        font-weight: 700;
+    }
