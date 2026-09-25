@@ -172,7 +172,7 @@
     }
 
     /* 用偽元素重新注入你的文字，跟隨原本排版，絕對不歪 */
-    .footer .hope-anchor[href*="github.com/alist-org/alist"]::before {
+    .footer .hope-anchor[href*="https://github.com/OpenListTeam/OpenList"]::before {
         content: "© DWEP Server";          /* 在此隨意更換你的頁尾名 */
         font-size: 14px !important;      /* 恢復正常字體大小 */
         font-weight: 500;
