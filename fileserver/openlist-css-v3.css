@@ -1,5 +1,5 @@
 /* ==========================================
-            此版本含有魔改頁尾 + 登入頁雙模式背景 + 隱藏SVG光暈 + 首頁分享logo
+            此版本含有魔改頁尾 + 登入頁雙模式背景 + 隱藏SVG光暈
        ==========================================
          【全域自訂變數專區】只需調整這裡的數值即可 
        ========================================== */
@@ -250,32 +250,5 @@
         font-weight: 700;
     }
 
-    /* 1. 「首頁」圖示邏輯：精準選取指向根目錄 (href="/") 的元素 */
-    .hope-breadcrumb__link[href="/"]::before,
-    a.hope-breadcrumb__link[href="/"]::before {
-       content: "";
-        display: inline-block;
-        width: 1.2em;
-        height: 1.2em;
-        background-image: url('https://dwepserver.github.io/fileserver/logo.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        vertical-align: -0.2em;
-        margin-right: 6px;
-    }
 
-    /* 2. 「分享」圖示邏輯：選取不是根目錄 (href 不為 "/") 的當前頁面標籤 */
-    .hope-breadcrumb__link:not([href="/"])::before {
-        content: "";
-        display: inline-block;
-        width: 1.2em;
-        height: 1.2em;
-        background-image: url('https://dwepserver.github.io/fileserver/share.svg');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        vertical-align: -0.2em;
-        margin-right: 6px;
-    }
     
