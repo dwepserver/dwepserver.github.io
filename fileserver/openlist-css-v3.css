@@ -279,7 +279,7 @@ span.custom-bc-icon-svg {
     mask-position: center !important;
 }
 
-/* 首頁 Icon 遮罩 */
+/* 首頁 Icon 遮罩 (已更新為 home.svg) */
 span.custom-bc-icon-svg.home-icon {
     -webkit-mask-image: url('https://dwepserver.github.io/fileserver/home.svg');
     mask-image: url('https://dwepserver.github.io/fileserver/home.svg');
