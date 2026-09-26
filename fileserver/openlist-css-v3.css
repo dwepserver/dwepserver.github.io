@@ -281,8 +281,8 @@ span.custom-bc-icon-svg {
 
 /* 首頁 Icon 遮罩 */
 span.custom-bc-icon-svg.home-icon {
-    -webkit-mask-image: url('https://dwepserver.github.io/fileserver/logo-fileserver-1.svg');
-    mask-image: url('https://dwepserver.github.io/fileserver/logo-fileserver-1.svg');
+    -webkit-mask-image: url('https://dwepserver.github.io/fileserver/home.svg');
+    mask-image: url('https://dwepserver.github.io/fileserver/home.svg');
 }
 
 /* 分享 Icon 遮罩 */
