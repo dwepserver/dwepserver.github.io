@@ -1,12 +1,12 @@
 /* =================================================================================
    OpenList Custom JS - v3
-   自動載入 CSS + Header Logo 變色 + 麵包屑 Emoji 替換 (🏠 & 🎁)
+   自動載入 CSS + Header Logo 長寬比自適應/重複防護 + 麵包屑 SVG 變色 (🏠 & 🎁)
    ================================================================================= */
 
 (function () {
   'use strict';
 
-  // 1. 自動注入外部 CSS (openlist-css-v3.css)
+  // 1. 動態注入外部 CSS 與 Header Logo 特殊長寬比樣式
   const injectCSS = () => {
     if (!document.querySelector('link[href*="openlist-css-v3.css"]')) {
       const cssLink = document.createElement('link');
@@ -15,15 +15,21 @@
       document.head.appendChild(cssLink);
     }
 
-    // 動態注入 Header Logo 自動隨主題變色 (currentColor) 的 Mask 樣式
     if (!document.getElementById('custom-header-logo-style')) {
       const customStyle = document.createElement('style');
       customStyle.id = 'custom-header-logo-style';
       customStyle.textContent = `
+        /* 強制隱藏所有原生的 header 圖片，防止深淺色切換時重複出現 */
+        .header-left.hope-stack img.hope-image {
+          display: none !important;
+        }
+
+        /* 頂部 Header Logo (自適應寬度，不被拉扯成正方形) */
         .header-left.hope-stack .custom-header-logo-svg {
           display: inline-block;
-          width: 28px;
-          height: 28px;
+          height: 32px; /* 固定高度，寬度隨 SVG 比例自動調整 */
+          width: 140px; /* 設定足夠展開的預設寬度 */
+          max-width: 100%;
           background-color: currentColor;
           -webkit-mask-image: url('https://dwepserver.github.io/fileserver/logo-fileserver-1.svg');
           mask-image: url('https://dwepserver.github.io/fileserver/logo-fileserver-1.svg');
@@ -31,8 +37,8 @@
           mask-repeat: no-repeat;
           -webkit-mask-size: contain;
           mask-size: contain;
-          -webkit-mask-position: center;
-          mask-position: center;
+          -webkit-mask-position: left center;
+          mask-position: left center;
           vertical-align: middle;
         }
       `;
@@ -40,59 +46,64 @@
     }
   };
 
-  // 2. 替換頂部 Header Logo (隱藏原本 img，插入可自動跟隨字體變色的 SVG Mask)
+  // 2. 替換頂部 Header Logo (防重覆 + 隱藏原生 img)
   const updateHeaderLogo = () => {
     const headerLeft = document.querySelector('.header-left.hope-stack');
     if (headerLeft) {
-      const oldImg = headerLeft.querySelector('img.hope-image');
-      if (oldImg && !headerLeft.querySelector('.custom-header-logo-svg')) {
-        oldImg.style.display = 'none';
-        
+      // 確保隱藏原生 img
+      const oldImgs = headerLeft.querySelectorAll('img.hope-image');
+      oldImgs.forEach(img => {
+        img.style.setProperty('display', 'none', 'important');
+      });
+
+      // 檢查是否已經存在自訂 Logo，若不存在才建立
+      if (!headerLeft.querySelector('.custom-header-logo-svg')) {
         const svgIcon = document.createElement('span');
         svgIcon.className = 'custom-header-logo-svg';
-        headerLeft.insertBefore(svgIcon, oldImg);
+        headerLeft.insertBefore(svgIcon, headerLeft.firstChild);
       }
     }
   };
 
-  // 3. 替換麵包屑中的 Emoji (🏠 與 🎁)
+  // 3. 替換麵包屑中的 Emoji 為可變色的 SVG Mask (🏠 與 🎁)
   const replaceEmojiWithIcons = () => {
     const links = document.querySelectorAll('.hope-breadcrumb__link');
 
     links.forEach(el => {
-      // 替換 🏠 -> logo.png
+      // 替換 🏠 -> 隨字體變色的 SVG
       if (el.textContent.includes('🏠')) {
         el.innerHTML = el.innerHTML.replace(
           '🏠', 
-          '<img src="https://dwepserver.github.io/fileserver/logo.png" class="custom-bc-icon" />'
+          '<span class="custom-bc-icon-svg home-icon"></span>'
         );
       }
       
-      // 替換 🎁 -> share.svg
+      // 替換 🎁 -> 隨字體變色的 SVG
       if (el.textContent.includes('🎁')) {
         el.innerHTML = el.innerHTML.replace(
           '🎁', 
-          '<img src="https://dwepserver.github.io/fileserver/share.svg" class="custom-bc-icon" />'
+          '<span class="custom-bc-icon-svg share-icon"></span>'
         );
       }
     });
   };
 
-  // 4. 統一執行區域
+  // 4. 統一執行邏輯
   const runAllUpdates = () => {
     updateHeaderLogo();
     replaceEmojiWithIcons();
   };
 
-  // 5. 初始化與 MutationObserver 動態監聽
+  // 5. 初始化與 Observer 全局觀察
   const initObserver = () => {
-    injectCSS();        // 先注入 CSS
-    runAllUpdates();    // 執行 DOM 替換
+    injectCSS();
+    runAllUpdates();
 
     const observer = new MutationObserver(runAllUpdates);
     observer.observe(document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
+      attributes: true // 監聽屬性變化，精準防範切換深淺色時 DOM 的重構
     });
   };
 
