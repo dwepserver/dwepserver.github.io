@@ -1,12 +1,12 @@
 /* =================================================================================
    OpenList Custom JS - v3
-   自動載入 CSS + Header Logo 長寬比自適應/重複防護 + 麵包屑 SVG 變色 (🏠 & 🎁)
+   自動載入 CSS + Header 圖片旁新增自訂文字 (隨主題變色) + 麵包屑 SVG 變色 (🏠 home.svg & 🎁 share.svg)
    ================================================================================= */
 
 (function () {
   'use strict';
 
-  // 1. 動態注入外部 CSS 與 Header Logo 特殊長寬比樣式
+  // 1. 動態注入外部 CSS 與 Header 自訂文字樣式
   const injectCSS = () => {
     if (!document.querySelector('link[href*="openlist-css-v3.css"]')) {
       const cssLink = document.createElement('link');
@@ -15,62 +15,56 @@
       document.head.appendChild(cssLink);
     }
 
-    if (!document.getElementById('custom-header-logo-style')) {
+    if (!document.getElementById('custom-header-text-style')) {
       const customStyle = document.createElement('style');
-      customStyle.id = 'custom-header-logo-style';
+      customStyle.id = 'custom-header-text-style';
       customStyle.textContent = `
-        /* 強制隱藏所有原生的 header 圖片，防止深淺色切換時重複出現 */
-        .header-left.hope-stack img.hope-image {
-          display: none !important;
+        /* 確保原生圖片與自訂文字垂直居中對齊 */
+        .header-left.hope-stack {
+          display: flex;
+          align-items: center;
+          gap: 8px; /* 圖片與文字的間距 */
         }
 
-        /* 頂部 Header Logo (自適應寬度，不被拉扯成正方形) */
-        .header-left.hope-stack .custom-header-logo-svg {
-          display: inline-block;
-          height: 32px; /* 固定高度，寬度隨 SVG 比例自動調整 */
-          width: 140px; /* 設定足夠展開的預設寬度 */
-          max-width: 100%;
-          background-color: currentColor;
-          -webkit-mask-image: url('https://dwepserver.github.io/fileserver/logo-fileserver-1.svg');
-          mask-image: url('https://dwepserver.github.io/fileserver/logo-fileserver-1.svg');
-          -webkit-mask-repeat: no-repeat;
-          mask-repeat: no-repeat;
-          -webkit-mask-size: contain;
-          mask-size: contain;
-          -webkit-mask-position: left center;
-          mask-position: left center;
-          vertical-align: middle;
+        /* 保留原生圖片並確保顯示 */
+        .header-left.hope-stack img.hope-image {
+          display: inline-block !important;
+        }
+
+        /* 自訂 Header 文字：跟隨 Theme 文字顏色 */
+        .header-left.hope-stack .custom-header-title {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: inherit; /* 自動跟隨主題 Header 文字顏色 */
+          line-height: 1.2;
+          user-select: none;
+          white-space: nowrap;
         }
       `;
       document.head.appendChild(customStyle);
     }
   };
 
-  // 2. 替換頂部 Header Logo (防重覆 + 隱藏原生 img)
+  // 2. 在 Header 圖片旁插入自訂文字 (防重複)
   const updateHeaderLogo = () => {
     const headerLeft = document.querySelector('.header-left.hope-stack');
     if (headerLeft) {
-      // 確保隱藏原生 img
-      const oldImgs = headerLeft.querySelectorAll('img.hope-image');
-      oldImgs.forEach(img => {
-        img.style.setProperty('display', 'none', 'important');
-      });
-
-      // 檢查是否已經存在自訂 Logo，若不存在才建立
-      if (!headerLeft.querySelector('.custom-header-logo-svg')) {
-        const svgIcon = document.createElement('span');
-        svgIcon.className = 'custom-header-logo-svg';
-        headerLeft.insertBefore(svgIcon, headerLeft.firstChild);
+      // 檢查是否已經存在自訂文字，若不存在才建立並 append 到圖片旁邊
+      if (!headerLeft.querySelector('.custom-header-title')) {
+        const titleSpan = document.createElement('span');
+        titleSpan.className = 'custom-header-title';
+        titleSpan.textContent = 'DWEP File Server'; // 👈 可自行修改為你想要顯示的標題文字
+        headerLeft.appendChild(titleSpan);
       }
     }
   };
 
-  // 3. 替換麵包屑中的 Emoji 為可變色的 SVG Mask (🏠 與 🎁)
+  // 3. 替換麵包屑中的 Emoji 為可變色的 SVG Mask (🏠 home.svg 與 🎁 share.svg)
   const replaceEmojiWithIcons = () => {
     const links = document.querySelectorAll('.hope-breadcrumb__link');
 
     links.forEach(el => {
-      // 替換 🏠 -> 隨字體變色的 SVG
+      // 替換 🏠 -> home.svg Mask
       if (el.textContent.includes('🏠')) {
         el.innerHTML = el.innerHTML.replace(
           '🏠', 
@@ -78,7 +72,7 @@
         );
       }
       
-      // 替換 🎁 -> 隨字體變色的 SVG
+      // 替換 🎁 -> share.svg Mask
       if (el.textContent.includes('🎁')) {
         el.innerHTML = el.innerHTML.replace(
           '🎁', 
@@ -88,13 +82,13 @@
     });
   };
 
-  // 4. 統一執行邏輯
+  // 4. 統一執行區域
   const runAllUpdates = () => {
     updateHeaderLogo();
     replaceEmojiWithIcons();
   };
 
-  // 5. 初始化與 Observer 全局觀察
+  // 5. 初始化與 Observer 全局動態監聽
   const initObserver = () => {
     injectCSS();
     runAllUpdates();
@@ -103,7 +97,7 @@
     observer.observe(document.body, {
       childList: true,
       subtree: true,
-      attributes: true // 監聽屬性變化，精準防範切換深淺色時 DOM 的重構
+      attributes: true
     });
   };
 
