@@ -5,7 +5,7 @@ const replaceEmojiWithIcons = () => {
     if (el.textContent.includes('🏠')) {
       el.innerHTML = el.innerHTML.replace(
         '🏠', 
-        '<img src="https://dwepserver.github.io/fileserver/logo.png" class="custom-bc-icon" />'
+        '<img src="https://dwepserver.github.io/fileserver/home.svg" class="custom-bc-icon" />'
       );
     }
     
