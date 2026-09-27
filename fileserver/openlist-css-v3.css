@@ -206,7 +206,8 @@ use[href="#path-2"] {
     justify-content: center !important;
 }
 
-.footer .hope-anchor {
+.footer .hope-anchor,
+.footer .custom-footer-text {
     font-size: 14px !important;
     text-decoration: none !important;
     font-weight: 500;
@@ -214,13 +215,15 @@ use[href="#path-2"] {
 
 /* 白天模式頁尾顏色控制 */
 .hope-ui-light .footer .hope-stack, 
-.hope-ui-light .footer .hope-anchor {
+.hope-ui-light .footer .hope-anchor,
+.hope-ui-light .footer .custom-footer-text {
     color: #dfdfdf !important;
 }
 
 /* 夜間模式頁尾顏色控制 */
 .hope-ui-dark .footer .hope-stack, 
-.hope-ui-dark .footer .hope-anchor {
+.hope-ui-dark .footer .hope-anchor,
+.hope-ui-dark .footer .custom-footer-text {
     color: #e2e8f0 !important;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
