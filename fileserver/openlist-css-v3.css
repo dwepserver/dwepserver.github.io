@@ -192,44 +192,35 @@ use[href="#path-2"] {
 }
 
 /* ==========================================
-   【CSS 魔改頁尾】不扭曲結構、自適應、關閉預設連結
+   【頁尾佈局與深淺色模式控制】
    ========================================== */
 .footer.hope-stack {
     background: transparent !important;
-    padding: 24px 0;
+    padding: 24px 0 !important;
 }
 
-/* 鎖定原廠放「由 AList 驅動」的超連結 */
-.footer .hope-anchor[href*="https://github.com/OpenListTeam/OpenList"],
-.footer .hope-anchor[href*="https://github.com/alist-org/alist"] {
-    font-size: 0 !important;
-    display: inline-flex !important;
-    align-items: center;
-    text-decoration: none !important;
-    pointer-events: none !important;
-    cursor: default !important;
+.footer .hope-stack {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-/* 自訂頁尾內容 */
-.footer .hope-anchor[href*="https://github.com/OpenListTeam/OpenList"]::before,
-.footer .hope-anchor[href*="https://github.com/alist-org/alist"]::before {
-    content: "© DWEP Server, Powered by OpenList";
+.footer .hope-anchor {
     font-size: 14px !important;
+    text-decoration: none !important;
     font-weight: 500;
-    user-select: none;
 }
 
 /* 白天模式頁尾顏色控制 */
 .hope-ui-light .footer .hope-stack, 
-.hope-ui-light .footer .hope-anchor,
-.hope-ui-light .footer .hope-anchor::before {
+.hope-ui-light .footer .hope-anchor {
     color: #dfdfdf !important;
 }
 
 /* 夜間模式頁尾顏色控制 */
 .hope-ui-dark .footer .hope-stack, 
-.hope-ui-dark .footer .hope-anchor,
-.hope-ui-dark .footer .hope-anchor::before {
+.hope-ui-dark .footer .hope-anchor {
     color: #e2e8f0 !important;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
