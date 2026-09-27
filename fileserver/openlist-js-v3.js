@@ -1,6 +1,6 @@
 /* =================================================================================
    OpenList Custom JS - v3
-   自動載入 CSS + Header 圖片旁新增自訂文字 (隨主題變色) + 麵包屑 SVG 變色 (🏠 home.svg & 🎁 share.svg)
+   自動載入 CSS + Header 圖片旁新增自訂文字 + 麵包屑 SVG 變色 + 頁尾 JS 動態重構
    ================================================================================= */
 
 (function () {
@@ -49,11 +49,10 @@
   const updateHeaderLogo = () => {
     const headerLeft = document.querySelector('.header-left.hope-stack');
     if (headerLeft) {
-      // 檢查是否已經存在自訂文字，若不存在才建立並 append 到圖片旁邊
       if (!headerLeft.querySelector('.custom-header-title')) {
         const titleSpan = document.createElement('span');
         titleSpan.className = 'custom-header-title';
-        titleSpan.textContent = 'DWEP File Server'; // 👈 可自行修改為你想要顯示的標題文字
+        titleSpan.textContent = 'DWEP File Server';
         headerLeft.appendChild(titleSpan);
       }
     }
@@ -64,7 +63,6 @@
     const links = document.querySelectorAll('.hope-breadcrumb__link');
 
     links.forEach(el => {
-      // 替換 🏠 -> home.svg Mask
       if (el.textContent.includes('🏠')) {
         el.innerHTML = el.innerHTML.replace(
           '🏠', 
@@ -72,7 +70,6 @@
         );
       }
       
-      // 替換 🎁 -> share.svg Mask
       if (el.textContent.includes('🎁')) {
         el.innerHTML = el.innerHTML.replace(
           '🎁', 
@@ -82,13 +79,47 @@
     });
   };
 
-  // 4. 統一執行區域
+  // 4. 重構頁尾：上方為「登錄」，下方為「© DWEP Server, Powered by OpenList」
+  const updateFooter = () => {
+    const footerContainer = document.querySelector('.footer .hope-stack');
+    if (!footerContainer) return;
+
+    const poweredByLink = footerContainer.querySelector('a[href*="OpenList"], a[href*="alist"]');
+    const loginLink = footerContainer.querySelector('a[href*="/@login"]');
+
+    // 修改文字內容
+    if (poweredByLink && poweredByLink.textContent !== '© DWEP Server, Powered by OpenList') {
+      poweredByLink.textContent = '© DWEP Server, Powered by OpenList';
+    }
+
+    // 隱藏中間豎線 "|"
+    const divider = Array.from(footerContainer.children).find(
+      el => el.tagName === 'SPAN' && el.textContent.includes('|')
+    );
+    if (divider) {
+      divider.style.display = 'none';
+    }
+
+    // 重新排列位置為上下垂直佈局
+    if (loginLink && poweredByLink) {
+      footerContainer.style.setProperty('flex-direction', 'column', 'important');
+      footerContainer.style.setProperty('align-items', 'center', 'important');
+      footerContainer.style.setProperty('gap', '6px', 'important');
+
+      // 重新順序插入：第一行登錄，第二行版權資訊
+      footerContainer.appendChild(loginLink);
+      footerContainer.appendChild(poweredByLink);
+    }
+  };
+
+  // 5. 統一執行區域
   const runAllUpdates = () => {
     updateHeaderLogo();
     replaceEmojiWithIcons();
+    updateFooter();
   };
 
-  // 5. 初始化與 Observer 全局動態監聽
+  // 6. 初始化與 Observer 全局動態監聽
   const initObserver = () => {
     injectCSS();
     runAllUpdates();
