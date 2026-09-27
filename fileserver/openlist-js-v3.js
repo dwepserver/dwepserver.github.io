@@ -1,6 +1,6 @@
 /* =================================================================================
    OpenList Custom JS - v3
-   自動載入 CSS + Header 圖片旁新增自訂文字 + 麵包屑 SVG 變色 + 頁尾 JS 動態重構
+   自動載入 CSS + Header 圖片旁新增自訂文字 + 麵包屑 SVG 變色 + 頁尾隱藏原連結並新增自訂文字
    ================================================================================= */
 
 (function () {
@@ -79,17 +79,15 @@
     });
   };
 
-  // 4. 重構頁尾：上方為「登錄」，下方為「© DWEP Server, Powered by OpenList」
+  // 4. 重構頁尾：隱藏原 OpenList 連結，於「登錄」下方插入全新文字行
   const updateFooter = () => {
     const footerContainer = document.querySelector('.footer .hope-stack');
     if (!footerContainer) return;
 
+    // 尋找原本的 OpenList 連結並隱藏
     const poweredByLink = footerContainer.querySelector('a[href*="OpenList"], a[href*="alist"]');
-    const loginLink = footerContainer.querySelector('a[href*="/@login"]');
-
-    // 修改文字內容
-    if (poweredByLink && poweredByLink.textContent !== '© DWEP Server, Powered by OpenList') {
-      poweredByLink.textContent = '© DWEP Server, Powered by OpenList';
+    if (poweredByLink) {
+      poweredByLink.style.display = 'none';
     }
 
     // 隱藏中間豎線 "|"
@@ -100,15 +98,17 @@
       divider.style.display = 'none';
     }
 
-    // 重新排列位置為上下垂直佈局
-    if (loginLink && poweredByLink) {
-      footerContainer.style.setProperty('flex-direction', 'column', 'important');
-      footerContainer.style.setProperty('align-items', 'center', 'important');
-      footerContainer.style.setProperty('gap', '6px', 'important');
+    // 設定父容器為上下垂直排版
+    footerContainer.style.setProperty('flex-direction', 'column', 'important');
+    footerContainer.style.setProperty('align-items', 'center', 'important');
+    footerContainer.style.setProperty('gap', '6px', 'important');
 
-      // 重新順序插入：第一行登錄，第二行版權資訊
-      footerContainer.appendChild(loginLink);
-      footerContainer.appendChild(poweredByLink);
+    // 在「登錄」連結下方插入全新的文字區塊 (防重複)
+    if (!footerContainer.querySelector('.custom-footer-text')) {
+      const customFooterText = document.createElement('div');
+      customFooterText.className = 'custom-footer-text';
+      customFooterText.textContent = '© DWEP Server, Powered by OpenList';
+      footerContainer.appendChild(customFooterText);
     }
   };
 
