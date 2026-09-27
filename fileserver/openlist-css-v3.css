@@ -213,7 +213,7 @@ use[href="#path-2"] {
 /* 自訂頁尾內容 */
 .footer .hope-anchor[href*="https://github.com/OpenListTeam/OpenList"]::before,
 .footer .hope-anchor[href*="https://github.com/alist-org/alist"]::before {
-    content: "© DWEP Server";
+    content: "© DWEP Server, Powered by OpenList";
     font-size: 14px !important;
     font-weight: 500;
     user-select: none;
