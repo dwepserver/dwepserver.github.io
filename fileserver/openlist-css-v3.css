@@ -254,6 +254,20 @@ h2.hope-heading.hope-c-PJLV-ibojvKk-css::after {
 }
 
 /* ==========================================
+   【精準隱藏 Full view，保留 Fullscreen】
+   ========================================== */
+
+/* 1. 只隱藏 Full view 按鈕 */
+button[aria-label="Full view"] {
+    display: none !important;
+}
+
+/* 2. 強制確保 Fullscreen 按鈕正常顯示 */
+button[aria-label="Fullscreen"] {
+    display: inline-flex !important;
+}
+
+/* ==========================================
    【SVG Mask 自動變色圖示專用樣式】
    ========================================== */
 
