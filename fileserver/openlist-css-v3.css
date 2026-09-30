@@ -30,17 +30,22 @@
     position: relative;
 }
 
-/* 全螢幕背景毛玻璃與深淺遮罩層（主頁面） */
+/* 全螢幕背景毛玻璃與深淺遮罩層（主頁面修正版） */
 .hope-ui-light::before, 
 .hope-ui-dark::before {
     content: "";
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    right: 0;     /* 改用 right: 0 替代 100vw，避開滾動條寬度計算計算出的溢出毛邊 */
+    bottom: 0;    /* 改用 bottom: 0 替代 100vh */
+    width: 100%;  /* 使用 100% 緊貼視窗可用區域，不會把滾動條寬度算進去 */
+    height: 100%;
     z-index: -1; 
     pointer-events: none; 
+    box-shadow: none !important;        /* 移除偽元素本身的陰影 */
+    -webkit-box-shadow: none !important;
+    outline: none !important;
 }
 
 .hope-ui-light::before {
