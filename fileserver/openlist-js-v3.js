@@ -52,7 +52,7 @@
       if (!headerLeft.querySelector('.custom-header-title')) {
         const titleSpan = document.createElement('span');
         titleSpan.className = 'custom-header-title';
-        titleSpan.textContent = 'DWEP File Server';
+        titleSpan.textContent = 'DWEP Drive';
         headerLeft.appendChild(titleSpan);
       }
     }
